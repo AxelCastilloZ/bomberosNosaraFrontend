@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Donante } from "../../types/donate";
+import { Donante } from "../../../types/donate";
 
 interface ModalProps {
   donante: Donante | null;

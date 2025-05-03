@@ -1,4 +1,5 @@
-
+import AboutUsPage from "./AboutUsPage";
+import { DonantesPage } from "./DonantesPage";
 
 export default function Home() {
     return (
@@ -11,6 +12,9 @@ export default function Home() {
                 Nos dedicamos a servir a la comunidad de Nosara con compromiso, integridad y acción.
                 Conocé más sobre nuestros aliados y cómo podés apoyar nuestra labor.
             </p>
+
+            <AboutUsPage />
+            <DonantesPage />
         </div>
     );
 }

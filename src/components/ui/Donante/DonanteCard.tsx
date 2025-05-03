@@ -1,4 +1,4 @@
-import { Donante } from "../../types/donate";
+import { Donante } from "../../../types/donate";
 
 interface Props {
   donante: Donante;

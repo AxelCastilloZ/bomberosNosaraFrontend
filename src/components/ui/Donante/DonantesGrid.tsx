@@ -1,4 +1,4 @@
-import { Donante } from "../../types/donate";
+import { Donante } from "../../../types/donate";
 import { DonanteCard } from "./DonanteCard";
 
 interface GridProps {
