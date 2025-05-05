@@ -15,6 +15,7 @@ import AboutSection from '../components/ui/AboutUs/AboutSection';
         createRoute({ path: '/', component: Home, getParentRoute: () => rootRoute }),
         createRoute({ path: '/donantes', component: DonantesPage, getParentRoute: () => rootRoute }),
         createRoute({ path: '/sobre-nosotros', component: AboutSection, getParentRoute: () => rootRoute }),
+        createRoute({ path: '/vista-administrativa', component: DonantesPage, getParentRoute: () => rootRoute }),
     ])
 
 export const router = createRouter({ routeTree });
