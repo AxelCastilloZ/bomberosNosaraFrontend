@@ -81,7 +81,7 @@ export default function AdminDonantesPage() {
         <img
           src={row.original.logo}
           alt={row.original.nombre}
-          className="h-10 w-10 object-contain"
+          className="h-30 w-30 object-contain"
         />
       ),
     },
