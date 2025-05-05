@@ -1,15 +1,12 @@
 import { Mail, Phone, HandCoins } from "lucide-react";
-import Reunion from "../../../images/image-Estructura-organizativa.png"
-import IncendioBomberos1 from "../../../images/OIP.jpg"
-import IncendioBomberos2 from "../../../images/OIP (1).jpg"
- 
- 
+
+
 export const DonationDetails = () => {
   return (
     <section className="bg-white text-center text-[#2e2e2e] font-light">
       <div className="flex flex-col lg:flex-row">
         <img
-          src= {Reunion}
+          src="https://i.ibb.co/TxG7d8Lp/image-Estructura-organizativa.webp"
           alt="Reunión Bomberos"
           className="w-full lg:w-1/3 object-cover"
         />
@@ -28,7 +25,7 @@ export const DonationDetails = () => {
           </p>
         </div>
         <img
-          src= {IncendioBomberos1}
+          src="https://i.ibb.co/fVycDtCg/OIP.webp"
           alt="Incendio Bomberos"
           className="w-full lg:w-1/3 object-cover"
         />
@@ -47,7 +44,7 @@ export const DonationDetails = () => {
         </div>
 
         <img
-          src= {IncendioBomberos2}
+          src="https://i.ibb.co/WpYyjM1j/OIP-1.webp"
           alt="Incendio controlado"
           className="w-full lg:w-1/3 object-cover"
         />

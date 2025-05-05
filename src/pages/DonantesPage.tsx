@@ -1,20 +1,29 @@
-import { useState } from "react";
-import { DONANTES } from "../data/donantes";
-import { Donante } from "../types/donate";
-import { DonanteModal } from "../components/ui/Donante/DonanteModal";
-import { DonantesGrid } from "../components/ui/Donante/DonantesGrid";
+import { useState } from 'react';
+import { useDonantes } from '../service/JSONBinService';
+import { DonantesGrid } from '../components/ui/Donante/DonantesGrid';
+import { DonanteModal } from '../components/ui/Modals/DonanteModal';
+import { Donante } from '../types/donate';
 import { DonarAhoraSection } from "../components/ui/Donante/DonarAhoraSection";
 import { DonationDetails } from "../components/ui/Donante/DonationDetails";
 
-export function DonantesPage() {
-    const [selectedDonante, setSelectedDonante] = useState<Donante | null>(null);
+export default function DonantesPage() {
+  const { data: donantes = [], isLoading, isError } = useDonantes();
+  const [selected, setSelected] = useState<Donante | null>(null);
 
-    return (
-        <section className="bg-white">
-            <DonantesGrid donantes={DONANTES} onLeerMas={setSelectedDonante} />
-            <DonarAhoraSection />
-            <DonanteModal donante={selectedDonante} onClose={() => setSelectedDonante(null)} />
-            <DonationDetails />
-        </section>
-    );
+  if (isLoading) {
+    return <div className="text-center p-20">Cargando donantes...</div>;
+  }
+
+  if (isError) {
+    return <div className="text-center p-20 text-red-600">Error cargando donantes</div>;
+  }
+
+  return (
+    <>
+      <DonantesGrid donantes={donantes} onLeerMas={(donante) => setSelected(donante)} />
+      <DonarAhoraSection />
+      <DonanteModal donante={selected} onClose={() => setSelected(null)} />
+      <DonationDetails />
+    </>
+  );
 }

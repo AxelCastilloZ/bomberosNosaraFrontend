@@ -13,7 +13,6 @@ export const DonanteModal = ({ donante, onClose }: ModalProps) => {
     } else {
       document.body.style.overflow = "";
     }
-
     return () => {
       document.body.style.overflow = "";
     };
@@ -26,7 +25,7 @@ export const DonanteModal = ({ donante, onClose }: ModalProps) => {
       <div className="bg-white p-6 rounded-lg w-full max-w-md shadow-xl relative">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 w-10 h-10 flex items-center justify-center bg-red-600 text-white text-3xl rounded-full hover:bg-red-700 transition"
+          className="absolute top-3 right-3 text-white bg-red-600 rounded-full p-1 text-3xl hover:bg-red-700"
         >
           &times;
         </button>
@@ -34,7 +33,7 @@ export const DonanteModal = ({ donante, onClose }: ModalProps) => {
         <img
           src={donante.logo}
           alt={donante.nombre}
-          className="h-50 mx-auto mb-4 object-contain"
+          className="h-40 mx-auto mb-4 object-contain"
         />
 
         <h2 className="text-xl font-bold text-center mb-2">{donante.nombre}</h2>
@@ -45,7 +44,7 @@ export const DonanteModal = ({ donante, onClose }: ModalProps) => {
           href={donante.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full text-center bg-red-600 text-white py-2 rounded hover:bg-red-700 transition-colors"
+          className="block w-full text-center bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
         >
           Visitar sitio del donante
         </a>
