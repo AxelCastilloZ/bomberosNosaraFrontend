@@ -1,9 +1,9 @@
 import AboutUsPage from "./AboutUsPage";
-import { DonantesPage } from "./DonantesPage";
+import DonantesPage from "./DonantesPage";
 
 export default function Home() {
     return (
-        <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4 text-center">
+        <div className="min-h-screen bg-white px-4 text-center pt-28 flex flex-col items-center">
             <h1 className="text-5xl font-serif font-light text-gray-900 mb-6">
                 Bienvenido a Bomberos Nosara
             </h1>
@@ -14,11 +14,10 @@ export default function Home() {
             </p>
 
             <AboutUsPage />
-            <DonantesPage />
+
+            <div className="mt-16 w-full">
+                <DonantesPage />
+            </div>
         </div>
     );
 }
-
-// Este Home es solo temporal, para que la app no esté vacía.
-// Cuando se terminen los demas modulos, se eliminará y se reemplazará por el Home real.
-// Ya cuando se reemplace se debe de ver como en la pagina oriniginal hacia abajo
