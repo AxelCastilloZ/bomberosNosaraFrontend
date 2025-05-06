@@ -12,6 +12,8 @@ import {
   import AdminLoginPage from '../pages/AdminLoginPage';
   import AdminDonantesPage from '../pages/AdminDonantesPage';
   import { authenticateAdmin } from '../auth/AdminAuth';
+  import NoticiasPage from '../pages/NoticiasPage'; 
+
   
   const isAdminAuthenticated = () => {
     const user = localStorage.getItem('adminUser');
@@ -52,6 +54,13 @@ import {
         }
       },
     }),
+
+    createRoute({
+      path: '/noticias',
+      component: NoticiasPage,
+      getParentRoute: () => rootRoute,
+    }),
+    
   ]);
   
   export const router = createRouter({ routeTree });

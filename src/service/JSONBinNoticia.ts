@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import { Noticia } from '../types/news'
 
-const API_URL_NOTICIAS='https://api.jsonbin.io/v3/b/68190f108561e97a500e5e1b';
+const API_URL_NOTICIAS='https://api.jsonbin.io/v3/b/681a61ee8960c979a594935e';
 const API_KEY='$2a$10$DENA/.r4bFybbXVPbIvWk.YMDefPOll0GaiMSiKHacGkVUJbkeFEC';
 
 
