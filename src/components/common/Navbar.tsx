@@ -57,6 +57,9 @@ export default function Navbar() {
             </Link>
             <Link to="/sugerencias" className="text-gray-700 hover:text-red-600 px-2 py-1 text-sm font-medium border-b-2 border-transparent hover:border-red-600 transition-all">
               SUGERENCIAS
+              </Link>
+            <Link to="/noticias" className="text-gray-700 hover:text-red-600 px-2 py-1 text-sm font-medium border-b-2 border-transparent hover:border-red-600 transition-all">
+              NOTICIAS
             </Link>
             <Link to="/contacto" className="text-gray-700 hover:text-red-600 px-2 py-1 text-sm font-medium border-b-2 border-transparent hover:border-red-600 transition-all">
               CONTACTO
