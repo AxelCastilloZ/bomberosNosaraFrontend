@@ -13,9 +13,10 @@ import {
   flexRender,
   ColumnDef,
 } from '@tanstack/react-table';
-import { LoadingModal } from '../components/ui/Modals/LoadingModal';
-import { SuccessModal } from '../components/ui/Modals/SuccessModal';
-import { ConfirmModal } from '../components/ui/Modals/ConfirmModal';
+import { LoadingModal } from '../components/ui/Modals/Donantes/LoadingModal';
+import { SuccessModal } from '../components/ui/Modals/Donantes/SuccessModal';
+import { ConfirmModal } from '../components/ui/Modals/Donantes/ConfirmModal';
+
 
 export default function AdminDonantesPage() {
   const { data: donantes = [], isLoading } = useDonantes();
