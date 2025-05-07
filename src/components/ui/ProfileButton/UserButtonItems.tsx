@@ -2,7 +2,7 @@ import { useRouter } from "@tanstack/react-router";
 
 type UserButtonItemsProps = {
   label: string;
-  to?: string;
+  to?: '/' | '/admin' | '/admin/donantes' | '/admin/usuarios' | '/admin/vehiculos' | '/admin/chat' | '/login';
   onClick?: () => void;
   isDanger?: boolean;
 };
@@ -11,8 +11,8 @@ const UserButtonItems = ({ label, to, onClick, isDanger }: UserButtonItemsProps)
   const router = useRouter();
 
   const handleClick = () => {
-    if (onClick) return onClick();           // Ejecuta función personalizada
-    if (to) router.navigate({ to });         // Redirige si se provee "to"
+    if (onClick) return onClick();
+    if (to) router.navigate({ to }); // 👈 esta forma es compatible con el tipo de TanStack Router v1
   };
 
   return (

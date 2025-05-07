@@ -45,7 +45,7 @@ const UserButton: FC = () => {
             <UserButtonItems label="Iniciar sesión" onClick={handleLogin} />
           ) : (
             <>
-              <UserButtonItems label="Vista administrativa" to="/admin/donantes" />
+              <UserButtonItems label="Vista administrativa" to="/admin" />
               <UserButtonItems label="Configuración" to="/settings" />
               <hr className="my-1" />
               <UserButtonItems label="Cerrar sesión" onClick={handleLogout} isDanger />
