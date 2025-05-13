@@ -2,7 +2,15 @@ import { useRouter } from "@tanstack/react-router";
 
 type UserButtonItemsProps = {
   label: string;
-  to?: '/' | '/admin' | '/admin/donantes' | '/admin/usuarios' | '/admin/vehiculos' | '/admin/chat' | '/login';
+  to?: 
+    '/' |
+    '/login' |
+    '/admin' |
+    '/admin/donantes' |
+    '/admin/usuarios' |
+    '/admin/vehiculos' |
+    '/admin/chat' |
+    '/settings'; // ✅ agregado aquí
   onClick?: () => void;
   isDanger?: boolean;
 };
@@ -11,8 +19,8 @@ const UserButtonItems = ({ label, to, onClick, isDanger }: UserButtonItemsProps)
   const router = useRouter();
 
   const handleClick = () => {
-    if (onClick) return onClick();
-    if (to) router.navigate({ to }); // 👈 esta forma es compatible con el tipo de TanStack Router v1
+    if (onClick) return onClick();           // Ejecuta acción directa si hay onClick
+    if (to) router.navigate({ to });         // Navega usando TanStack Router v1
   };
 
   return (
