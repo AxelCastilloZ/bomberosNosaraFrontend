@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { useState, useEffect } from 'react';
+import UserButton from '../ui/ProfileButton/UserButton.js';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -68,13 +69,8 @@ export default function Navbar() {
               DONAR
             </Link>
 
-            <Link to="/login" className="hover:text-red-600 px-2" title="Acceso Administrador">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M12 11c0-1.657-1.343-3-3-3S6 9.343 6 11s1.343 3 3 3 3-1.343 3-3zM17 20v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2" />
-              </svg>
-            </Link>
+            <UserButton />
+
           </div>
 
           <div className="md:hidden flex items-center">
