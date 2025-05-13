@@ -13,12 +13,16 @@ import {
   import AdminDonantesPage from '../pages/AdminDonantesPage';
   import { authenticateAdmin } from '../auth/AdminAuth';
 
+  import NoticiasPage from '../pages/NoticiasPage'; 
+
+
   import AdminChatPage from '../pages/Administrativas/AdminChatPage';
 import AdminEquipoPage from '../pages/Administrativas/AdminEquipoPage';
 import AdminEstadisticasPage from '../pages/Administrativas/AdminEstadisticasPage';
 import AdminUsuariosPage from '../pages/Administrativas/AdminUsuariosPage';
 import AdminVehiculosPage from '../pages/Administrativas/AdminVehiculosPage';
 import AdminDashboardPage from '../pages/Administrativas/AdminDashboardPage';
+
 
 
   
@@ -61,6 +65,15 @@ import AdminDashboardPage from '../pages/Administrativas/AdminDashboardPage';
         }
       },
     }),
+
+
+    createRoute({
+      path: '/noticias',
+      component: NoticiasPage,
+      getParentRoute: () => rootRoute,
+    }),
+    
+
     createRoute({
         path: '/admin/chat',
         component: AdminChatPage,
@@ -111,6 +124,7 @@ import AdminDashboardPage from '../pages/Administrativas/AdminDashboardPage';
       }),
       
       
+
   ]);
   
   export const router = createRouter({ routeTree });
