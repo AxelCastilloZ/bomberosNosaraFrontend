@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDonantes } from '../service/JSONBinService';
 import { DonantesGrid } from '../components/ui/Donante/DonantesGrid';
-import { DonanteModal } from '../components/ui/Modals/DonanteModal';
+import { DonanteModal } from '../components/ui/Modals/Donantes/DonanteModal';
 import { Donante } from '../types/donate';
 import { DonarAhoraSection } from "../components/ui/Donante/DonarAhoraSection";
 import { DonationDetails } from "../components/ui/Donante/DonationDetails";
