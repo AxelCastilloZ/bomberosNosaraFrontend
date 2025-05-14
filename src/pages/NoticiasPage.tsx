@@ -1,4 +1,4 @@
-import { ListaNoticias } from '../components/ui/Noticias/ListaNoticias';
+import { ListaNoticias } from '../components/ui/Noticias/ListaNoticias'
 
 const NoticiasPage = () => {
   return (
@@ -9,4 +9,4 @@ const NoticiasPage = () => {
   );
 };
 
-export default NoticiasPage;
+export default NoticiasPage
