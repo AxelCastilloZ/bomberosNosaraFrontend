@@ -13,9 +13,9 @@ import {
   flexRender,
   ColumnDef,
 } from '@tanstack/react-table';
-import { LoadingModal } from '../components/ui/Modals/LoadingModal';
-import { SuccessModal } from '../components/ui/Modals/SuccessModal';
-import { ConfirmModal } from '../components/ui/Modals/ConfirmModal';
+import { LoadingModal } from '../components/ui/Modals/Donantes/LoadingModal';
+import { SuccessModal } from '../components/ui/Modals/Donantes/SuccessModal';
+import { ConfirmModal } from '../components/ui/Modals/Donantes/ConfirmModal';
 
 export default function AdminNoticiasPage() {
   const { data: noticias=[], isLoading }=useNoticias();
@@ -73,7 +73,7 @@ export default function AdminNoticiasPage() {
         form.reset();
       } catch (error) {
         console.error('Error en la operación:', error);
-        setSuccessMsg(`Error: ${error instanceof Error ? error.message : 'Ocurrió un error'}`);
+        setSuccessMsg(`Error: ${error instanceof Error? error.message:'Ocurrió un error'}`);
         setShowSuccess(true);
       } finally {
         setShowLoading(false);
@@ -107,7 +107,7 @@ export default function AdminNoticiasPage() {
       }
     } catch (error) {
       console.error('Error al eliminar:', error);
-      setSuccessMsg(`Error: ${error instanceof Error ? error.message : 'Ocurrió un error al eliminar'}`);
+      setSuccessMsg(`Error: ${error instanceof Error? error.message:'Ocurrió un error al eliminar'}`);
     } finally {
       setShowLoading(false);
       setShowConfirmDelete(false);
