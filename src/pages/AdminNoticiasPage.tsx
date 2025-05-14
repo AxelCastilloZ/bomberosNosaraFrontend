@@ -18,20 +18,20 @@ import { SuccessModal } from '../components/ui/Modals/SuccessModal';
 import { ConfirmModal } from '../components/ui/Modals/ConfirmModal';
 
 export default function AdminNoticiasPage() {
-  const { data: noticias = [], isLoading } = useNoticias();
-  const { mutate: addNoticia } = useAddNoticia();
-  const { mutate: updateNoticia } = useUpdateNoticia();
-  const { mutate: deleteNoticia } = useDeleteNoticia();
+  const { data: noticias=[], isLoading }=useNoticias();
+  const { mutate: addNoticia }=useAddNoticia();
+  const { mutate: updateNoticia }=useUpdateNoticia();
+  const { mutate: deleteNoticia }=useDeleteNoticia();
 
-  const [editingNoticia, setEditingNoticia] = useState<Noticia | null>(null);
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [showLoading, setShowLoading] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [successMsg, setSuccessMsg] = useState('');
-  const [toDeleteId, setToDeleteId] = useState<string | null>(null);
-  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [editingNoticia, setEditingNoticia]=useState<Noticia|null>(null);
+  const [isFormOpen, setIsFormOpen]=useState(false);
+  const [showLoading, setShowLoading]=useState(false);
+  const [showSuccess, setShowSuccess]=useState(false);
+  const [successMsg, setSuccessMsg]=useState('');
+  const [toDeleteId, setToDeleteId]=useState<string|null>(null);
+  const [showConfirmDelete, setShowConfirmDelete]=useState(false);
 
-  const form = useForm({
+  const form=useForm({
     defaultValues: {
       id: '',
       titulo: '',
@@ -40,25 +40,48 @@ export default function AdminNoticiasPage() {
       fecha: '',
     },
     onSubmit: async ({ value }) => {
-      setShowLoading(true);
-      setTimeout(() => {
+      try {
+        setShowLoading(true);
         if (editingNoticia) {
-          updateNoticia(value);
-          setSuccessMsg(`Noticia actualizada: ${value.titulo}`);
+          await new Promise<void>((resolve, reject) => {
+            updateNoticia(value, {
+              onSuccess: () => {
+                setSuccessMsg(`Noticia actualizada: ${value.titulo}`);
+                resolve();
+              },
+              onError: (error) => {
+                reject(error);
+              }
+            });
+          });
         } else {
-          addNoticia(value);
-          setSuccessMsg(`Noticia agregada: ${value.titulo}`);
+          await new Promise<void>((resolve, reject) => {
+            addNoticia(value, {
+              onSuccess: () => {
+                setSuccessMsg(`Noticia agregada: ${value.titulo}`);
+                resolve();
+              },
+              onError: (error) => {
+                reject(error);
+              }
+            });
+          });
         }
-        setShowLoading(false);
         setShowSuccess(true);
         setIsFormOpen(false);
         setEditingNoticia(null);
         form.reset();
-      }, 1000);
+      } catch (error) {
+        console.error('Error en la operación:', error);
+        setSuccessMsg(`Error: ${error instanceof Error ? error.message : 'Ocurrió un error'}`);
+        setShowSuccess(true);
+      } finally {
+        setShowLoading(false);
+      }
     },
   });
 
-  const handleEdit = (noticia: Noticia) => {
+  const handleEdit=(noticia: Noticia) => {
     setEditingNoticia(noticia);
     Object.entries(noticia).forEach(([key, value]) => {
       form.setFieldValue(key as keyof Noticia, value);
@@ -66,14 +89,33 @@ export default function AdminNoticiasPage() {
     setIsFormOpen(true);
   };
 
-  const handleDelete = () => {
-    if (toDeleteId) deleteNoticia(toDeleteId);
-    setShowConfirmDelete(false);
-    setSuccessMsg('Noticia eliminada correctamente');
-    setShowSuccess(true);
+  const handleDelete=async () => {
+    try {
+      setShowLoading(true);
+      if (toDeleteId) {
+        await new Promise<void>((resolve, reject) => {
+          deleteNoticia(toDeleteId, {
+            onSuccess: () => {
+              setSuccessMsg('Noticia eliminada correctamente');
+              resolve();
+            },
+            onError: (error) => {
+              reject(error);
+            }
+          });
+        });
+      }
+    } catch (error) {
+      console.error('Error al eliminar:', error);
+      setSuccessMsg(`Error: ${error instanceof Error ? error.message : 'Ocurrió un error al eliminar'}`);
+    } finally {
+      setShowLoading(false);
+      setShowConfirmDelete(false);
+      setShowSuccess(true);
+    }
   };
 
-  const columns = useMemo<ColumnDef<Noticia>[]>(() => [
+  const columns=useMemo<ColumnDef<Noticia>[]>(() => [
     {
       header: 'Imagen',
       accessorKey: 'url',
@@ -122,7 +164,7 @@ export default function AdminNoticiasPage() {
     },
   ], []);
 
-  const table = useReactTable({
+  const table=useReactTable({
     data: noticias,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -145,9 +187,9 @@ export default function AdminNoticiasPage() {
           </button>
         </div>
 
-        {isLoading ? (
+        {isLoading? (
           <p className="text-center text-gray-500">Cargando noticias...</p>
-        ) : (
+        ):(
           <div className="overflow-x-auto rounded-lg border border-gray-300 shadow-md">
             <table className="min-w-full bg-white border border-gray-300">
               <thead className="bg-red-100 text-red-800">
@@ -182,11 +224,11 @@ export default function AdminNoticiasPage() {
           </div>
         )}
 
-        {isFormOpen && (
+        {isFormOpen&&(
           <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4">
             <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-xl">
               <h2 className="text-xl font-bold text-red-700 mb-4 text-center">
-                {editingNoticia ? 'Editar Noticia' : 'Agregar Noticia'}
+                {editingNoticia? 'Editar Noticia':'Agregar Noticia'}
               </h2>
               <form
                 onSubmit={(e) => {
@@ -259,7 +301,7 @@ export default function AdminNoticiasPage() {
                     type="submit"
                     className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
                   >
-                    {editingNoticia ? 'Actualizar' : 'Agregar'}
+                    {editingNoticia? 'Actualizar':'Agregar'}
                   </button>
                 </div>
               </form>
@@ -267,11 +309,11 @@ export default function AdminNoticiasPage() {
           </div>
         )}
 
-        {showLoading && <LoadingModal />}
-        {showSuccess && (
+        {showLoading&&<LoadingModal />}
+        {showSuccess&&(
           <SuccessModal message={successMsg} onClose={() => setShowSuccess(false)} />
         )}
-        {showConfirmDelete && (
+        {showConfirmDelete&&(
           <ConfirmModal
             message="¿Estás seguro de eliminar esta noticia?"
             onConfirm={handleDelete}
