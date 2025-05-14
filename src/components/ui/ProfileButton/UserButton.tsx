@@ -1,13 +1,16 @@
-import { FC, useState, useRef, useEffect } from "react";
+import { FC, useRef, useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import UserButtonItems from "./UserButtonItems";
 import { useRouter } from "@tanstack/react-router";
+import { useAdminAuth } from "../../../auth/AdminAuthContext"; //  Usa el contexto real
 
 const UserButton: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+
+  const { user, logout } = useAdminAuth(); 
+  const isAuthenticated = Boolean(user);   
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -18,14 +21,14 @@ const UserButton: FC = () => {
   };
 
   const handleLogin = () => {
-    setIsAuthenticated(true);
     setIsOpen(false);
+    router.navigate({ to: "/login" }); 
   };
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
+    logout();                          // Cierra sesión real
     setIsOpen(false);
-    router.navigate({ to: "/" });
+    router.navigate({ to: "/" });      // Redirige al home
   };
 
   useEffect(() => {
