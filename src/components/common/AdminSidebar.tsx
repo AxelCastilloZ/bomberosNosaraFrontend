@@ -86,6 +86,13 @@ export const AdminSidebar = () => {
           </div>
 
           <nav className="flex flex-col space-y-4">
+           <Link
+              to="/admin/noticias"
+              className="text-red-600 hover:underline"
+            >
+              Noticias
+            </Link>
+            
             <Link
               to="/admin/donantes"
               className="text-red-600 hover:underline"
