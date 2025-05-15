@@ -20,7 +20,7 @@ export const ListaNoticias = () => {
 };*/
 
 import { NoticiaCard } from './NoticiaCard';
-import { useNoticias } from '../../../service/JSONBinNoticia';
+import { useNoticias } from '../../../service/JSONBinService';
 
 export const ListaNoticias = () => {
   const { data, isLoading, error } = useNoticias();
