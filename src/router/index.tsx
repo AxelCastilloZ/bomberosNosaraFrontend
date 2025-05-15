@@ -47,16 +47,6 @@ const routeTree=rootRoute.addChildren([
     getParentRoute: () => rootRoute,
   }),
   createRoute({
-    path: '/sobre-nosotros',
-    component: AboutSection,
-    getParentRoute: () => rootRoute,
-  }),
-  createRoute({
-    path: '/login',
-    component: AdminLoginPage,
-    getParentRoute: () => rootRoute,
-  }),
-  createRoute({
     path: '/admin/donantes',
     component: AdminDonantesPage,
     getParentRoute: () => rootRoute,
@@ -66,6 +56,17 @@ const routeTree=rootRoute.addChildren([
       }
     },
   }),
+  createRoute({
+    path: '/sobre-nosotros',
+    component: AboutSection,
+    getParentRoute: () => rootRoute,
+  }),
+  createRoute({
+    path: '/login',
+    component: AdminLoginPage,
+    getParentRoute: () => rootRoute,
+  }),
+ 
   createRoute({
     path: '/noticias',
     component: NoticiasPage,

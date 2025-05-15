@@ -4,7 +4,7 @@ import {
   useAddNoticia,
   useUpdateNoticia,
   useDeleteNoticia,
-} from '../service/JSONBinNoticia';
+} from '../service/JSONBinService';
 import { Noticia } from '../types/news';
 import { useForm } from '@tanstack/react-form';
 import {

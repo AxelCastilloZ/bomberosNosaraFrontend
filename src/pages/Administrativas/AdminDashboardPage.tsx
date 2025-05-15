@@ -1,4 +1,5 @@
-import { FaUserShield, FaUsers, FaFireExtinguisher, FaTruck, FaChartBar, FaComments } from "react-icons/fa";
+
+import { FaUserShield, FaUsers, FaFireExtinguisher, FaTruck, FaChartBar, FaComments ,FaNewspaper} from "react-icons/fa";
 
 const dashboardItems = [
   { icon: <FaUserShield size={24} />, label: "Administrar Donantes", href: "/admin/donantes" },
@@ -7,6 +8,7 @@ const dashboardItems = [
   { icon: <FaTruck size={24} />, label: "Inventario de Vehículos", href: "/admin/vehiculos" },
   { icon: <FaChartBar size={24} />, label: "Estadísticas", href: "/admin/estadisticas" },
   { icon: <FaComments size={24} />, label: "Chat Interno", href: "/admin/chat" },
+  { icon: <FaNewspaper size={24}/>, label: "Administrar Noticias", href: "/admin/noticias"},
 ];
 
 const AdminDashboardPage = () => {

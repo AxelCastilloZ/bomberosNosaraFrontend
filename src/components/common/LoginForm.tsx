@@ -18,7 +18,7 @@ export default function AdminLoginPage() {
       localStorage.setItem('adminUser', username);
       localStorage.setItem('adminPass', password);
       setUser(username);
-      navigate({ to: '/admin/donantes' });
+      navigate({ to: '/admin' });
     } else {
       setError('Credenciales inválidas');
     }
