@@ -1,38 +1,71 @@
-/*import { useNoticias } from '../api/newsService';
-import { NoticiaCard } from './ui/NoticiaCard';
-
-export const ListaNoticias = () => {
-  const { data, isLoading, isError } = useNoticias();
-
-  if (isLoading) return <p className="text-center text-gray-500">Cargando noticias...</p>;
-  if (isError) return <p className="text-center text-red-500">Error al cargar noticias</p>;
-
-  if (!data || data.length === 0)
-    return <p className="text-center text-gray-500">No hay noticias disponibles.</p>;
-
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {data.map((noticia) => (
-        <NoticiaCard key={noticia.id} noticia={noticia} />
-      ))}
-    </div>
-  );
-};*/
-
 import { NoticiaCard } from './NoticiaCard';
-import { useNoticias } from '../../../service/JSONBinService';
+import { useNoticias } from '../../../service/JSONBinNoticia';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+
+const FlechaCarrusel = ({ direccion, onClick }: { direccion: 'izquierda' | 'derecha', onClick?: () => void }) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        hidden md:block
+        absolute top-1/2 -translate-y-1/2 z-10
+        ${direccion === 'izquierda' ? 'left-2' : 'right-2'}
+        bg-white rounded-full p-2
+        hover:bg-red-100
+      `}
+    >
+      {direccion === 'izquierda' ? <FaChevronLeft size={20} /> : <FaChevronRight size={20} />}
+    </button>
+  );
+};
 
 export const ListaNoticias = () => {
-  const { data, isLoading, error } = useNoticias();
+  const { data: noticias, isLoading, error } = useNoticias();
 
-  if (isLoading) return <p>Cargando noticias...</p>;
-  if (error) return <p>Error al cargar noticias.</p>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-96">
+        <div className="animate-spin h-12 w-12 border-4 border-red-500 rounded-full border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500 p-4">
+        <p>No se pudieron cargar las noticias</p>
+      </div>
+    );
+  }
+
+  const configuracionCarrusel = {
+    dots: true, 
+    infinite: true, 
+    speed: 500, 
+    slidesToShow: 1, 
+    slidesToScroll: 1,
+    autoplay: true, 
+    autoplaySpeed: 5000, 
+    prevArrow: <FlechaCarrusel direccion="izquierda" />,
+    nextArrow: <FlechaCarrusel direccion="derecha" />,
+    
+    customPaging: () => (
+      <button className="w-3 h-3 rounded-full bg-gray-300 hover:bg-red-500 mt-4" />
+    )
+  };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {data?.map((noticia) => (
-        <NoticiaCard key={noticia.id} noticia={noticia} />
-      ))}
+    <div className="max-w-5xl mx-auto px-4">
+      <Slider {...configuracionCarrusel}>
+        {noticias?.map((noticia) => (
+          <div key={noticia.id} className="px-2">
+            <NoticiaCard noticia={noticia} />
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };
