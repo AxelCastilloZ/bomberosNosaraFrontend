@@ -23,7 +23,8 @@ import AdminUsuariosPage from '../pages/Administrativas/AdminUsuariosPage';
 import AdminVehiculosPage from '../pages/Administrativas/AdminVehiculosPage';
 import AdminDashboardPage from '../pages/Administrativas/AdminDashboardPage';
 import AdminNoticiasPage from '../pages/AdminNoticiasPage';
-
+import SuggestionsPage from '../pages/SuggestionsPage';
+import AdminSuggestionsPage from '../pages/AdminSuggestionsPage';
 
 
 
@@ -47,13 +48,8 @@ const routeTree=rootRoute.addChildren([
     getParentRoute: () => rootRoute,
   }),
   createRoute({
-    path: '/sobre-nosotros',
-    component: AboutSection,
-    getParentRoute: () => rootRoute,
-  }),
-  createRoute({
-    path: '/login',
-    component: AdminLoginPage,
+    path : '/sugerencias',
+    component: SuggestionsPage,
     getParentRoute: () => rootRoute,
   }),
   createRoute({
@@ -66,6 +62,27 @@ const routeTree=rootRoute.addChildren([
       }
     },
   }),
+  createRoute({
+    path: '/admin/sugerencias',
+    component: AdminSuggestionsPage,
+    getParentRoute: () => rootRoute,
+    beforeLoad: () => {
+      if (!isAdminAuthenticated()) {
+        throw redirect({ to: '/login' });
+      }
+    },
+  }),
+  createRoute({
+    path: '/sobre-nosotros',
+    component: AboutSection,
+    getParentRoute: () => rootRoute,
+  }),
+  createRoute({
+    path: '/login',
+    component: AdminLoginPage,
+    getParentRoute: () => rootRoute,
+  }),
+ 
   createRoute({
     path: '/noticias',
     component: NoticiasPage,

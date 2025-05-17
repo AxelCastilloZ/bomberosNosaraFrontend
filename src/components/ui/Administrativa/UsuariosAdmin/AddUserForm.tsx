@@ -10,7 +10,7 @@ const AddUserForm = () => {
     if (!nombre || !email || !rol) return alert('Todos los campos son obligatorios.');
 
     console.log({ nombre, email, rol });
-    // Aquí puedes agregar lógica de envío con React Query o fetch
+    
   };
 
   return (

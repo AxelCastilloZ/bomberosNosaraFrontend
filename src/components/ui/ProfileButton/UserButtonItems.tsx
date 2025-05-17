@@ -10,7 +10,7 @@ type UserButtonItemsProps = {
     '/admin/usuarios' |
     '/admin/vehiculos' |
     '/admin/chat' |
-    '/settings'; // ✅ agregado aquí
+    '/settings'; 
   onClick?: () => void;
   isDanger?: boolean;
 };
@@ -19,8 +19,8 @@ const UserButtonItems = ({ label, to, onClick, isDanger }: UserButtonItemsProps)
   const router = useRouter();
 
   const handleClick = () => {
-    if (onClick) return onClick();           // Ejecuta acción directa si hay onClick
-    if (to) router.navigate({ to });         // Navega usando TanStack Router v1
+    if (onClick) return onClick();          
+    if (to) router.navigate({ to });         
   };
 
   return (
