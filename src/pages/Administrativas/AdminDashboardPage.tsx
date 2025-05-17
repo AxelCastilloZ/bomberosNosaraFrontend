@@ -9,6 +9,7 @@ const dashboardItems = [
   { icon: <FaChartBar size={24} />, label: "Estadísticas", href: "/admin/estadisticas" },
   { icon: <FaComments size={24} />, label: "Chat Interno", href: "/admin/chat" },
   { icon: <FaNewspaper size={24}/>, label: "Administrar Noticias", href: "/admin/noticias"},
+  { icon: <FaComments size={24} />, label: "Sugerencias", href: "/admin/sugerencias" },
 ];
 
 const AdminDashboardPage = () => {
