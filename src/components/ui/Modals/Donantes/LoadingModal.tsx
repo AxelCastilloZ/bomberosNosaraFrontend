@@ -1,21 +1,19 @@
 import { motion } from 'framer-motion';
+import { AlarmClock } from 'lucide-react';
 
 export const LoadingModal = () => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md">
       <motion.div
-        className="bg-white p-6 rounded-lg shadow-lg text-center"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.8, opacity: 0 }}
+        className="bg-white/80 backdrop-blur-lg p-6 rounded-xl shadow-lg text-center border-2 border-red-600"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.3 }}
       >
         <div className="flex flex-col items-center gap-4">
-          <svg className="animate-spin h-8 w-8 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-          </svg>
-          <p className="text-gray-700 font-medium">Enviando datos, por favor espere...</p>
+          <AlarmClock className="h-10 w-10 text-red-600 animate-spin duration-[2s]" />
+          <p className="text-red-800 font-semibold">Enviando datos a la estación...</p>
         </div>
       </motion.div>
     </div>

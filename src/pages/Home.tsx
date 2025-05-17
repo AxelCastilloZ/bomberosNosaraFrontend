@@ -1,6 +1,7 @@
 import AboutUsPage from "./AboutUsPage";
 import DonantesPage from "./DonantesPage";
 import NoticiasPage from "./NoticiasPage";
+import SuggestionsPage from "./SuggestionsPage";
 
 export default function Home() {
     return (
@@ -22,6 +23,7 @@ export default function Home() {
             <div className="mt-16 w-full">
                 <NoticiasPage />
             </div>
+            <SuggestionsPage />
         </div>
     );
 }

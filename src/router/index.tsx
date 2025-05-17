@@ -23,7 +23,8 @@ import AdminUsuariosPage from '../pages/Administrativas/AdminUsuariosPage';
 import AdminVehiculosPage from '../pages/Administrativas/AdminVehiculosPage';
 import AdminDashboardPage from '../pages/Administrativas/AdminDashboardPage';
 import AdminNoticiasPage from '../pages/AdminNoticiasPage';
-
+import SuggestionsPage from '../pages/SuggestionsPage';
+import AdminSuggestionsPage from '../pages/AdminSuggestionsPage';
 
 
 
@@ -47,8 +48,23 @@ const routeTree=rootRoute.addChildren([
     getParentRoute: () => rootRoute,
   }),
   createRoute({
+    path : '/sugerencias',
+    component: SuggestionsPage,
+    getParentRoute: () => rootRoute,
+  }),
+  createRoute({
     path: '/admin/donantes',
     component: AdminDonantesPage,
+    getParentRoute: () => rootRoute,
+    beforeLoad: () => {
+      if (!isAdminAuthenticated()) {
+        throw redirect({ to: '/login' });
+      }
+    },
+  }),
+  createRoute({
+    path: '/admin/sugerencias',
+    component: AdminSuggestionsPage,
     getParentRoute: () => rootRoute,
     beforeLoad: () => {
       if (!isAdminAuthenticated()) {
