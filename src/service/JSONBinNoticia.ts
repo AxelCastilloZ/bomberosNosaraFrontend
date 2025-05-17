@@ -66,7 +66,7 @@ export const useNoticias = () => {
   return useQuery({
     queryKey: ['noticias'],
     queryFn: fetchNoticias,
-    staleTime: 1000 * 60 * 10, // 10 minutes
+    staleTime: 1000 * 60 * 10, 
     retry: 2,
   });
 };
