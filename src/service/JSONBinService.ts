@@ -3,8 +3,8 @@ import axios from 'axios';
 import { Donante } from '../types/donate';
 import { Noticia } from '../types/news';
 
-const API_URL='https://api.jsonbin.io/v3/b/681a61ee8960c979a594935e';
-const API_KEY='$2a$10$2Qe7w7qnouDtA0vJRto5But/xAv2GNMfE.STT5wNFEkoDi0r5a5Ou';
+const API_URL='https://api.jsonbin.io/v3/b/6818cbbc8a456b79669816fc';
+const API_KEY='$2a$10$NIDFvi1knP1VScO.viLMMOR3Zd4VhGHgEGQv6aUZwwn/WHubP3jaC';
 
 interface JSONBinData {
   donantes: Donante[];
