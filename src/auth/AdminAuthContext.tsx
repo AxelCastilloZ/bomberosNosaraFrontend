@@ -1,26 +1,27 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { authenticateAdmin } from './AdminAuth';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 interface AdminAuthContextType {
   user: string | null;
   setUser: (user: string | null) => void;
   logout: () => void;
+  isAuthenticated: boolean;
 }
 
 export const AdminAuthContext = createContext<AdminAuthContextType>({
   user: null,
   setUser: () => {},
   logout: () => {},
+  isAuthenticated: false,
 });
 
 export const AdminAuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUserState] = useState<string | null>(null);
 
   useEffect(() => {
-    const username = localStorage.getItem('adminUser');
-    const password = localStorage.getItem('adminPass');
-    if (username && password && authenticateAdmin(username, password)) {
-      setUserState(username);
+    const token = localStorage.getItem('authToken');
+    const storedUser = localStorage.getItem('authUser');
+    if (token && storedUser) {
+      setUserState(storedUser);
     } else {
       setUserState(null);
     }
@@ -29,19 +30,28 @@ export const AdminAuthProvider = ({ children }: { children: React.ReactNode }) =
   const setUser = (user: string | null) => {
     if (user) {
       setUserState(user);
+      localStorage.setItem('authUser', user);
     } else {
       setUserState(null);
+      localStorage.removeItem('authUser');
     }
   };
 
   const logout = () => {
-    localStorage.removeItem('adminUser');
-    localStorage.removeItem('adminPass');
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('authUser');
     setUserState(null);
   };
 
   return (
-    <AdminAuthContext.Provider value={{ user, setUser, logout }}>
+    <AdminAuthContext.Provider
+      value={{
+        user,
+        setUser,
+        logout,
+        isAuthenticated: !!user,
+      }}
+    >
       {children}
     </AdminAuthContext.Provider>
   );

@@ -11,7 +11,7 @@ import DonantesPage from '../pages/DonantesPage';
 import AboutSection from '../components/ui/AboutUs/AboutSection';
 import AdminLoginPage from '../pages/AdminLoginPage';
 import AdminDonantesPage from '../pages/AdminDonantesPage';
-import { authenticateAdmin } from '../auth/AdminAuth';
+import { isAdmin } from '../auth/AdminAuth';
 
 import NoticiasPage from '../pages/NoticiasPage';
 
@@ -29,9 +29,7 @@ import AdminSuggestionsPage from '../pages/AdminSuggestionsPage';
 
 
 const isAdminAuthenticated=() => {
-  const user=localStorage.getItem('adminUser');
-  const pass=localStorage.getItem('adminPass');
-  return authenticateAdmin(user||'', pass||'');
+  return isAdmin();
 };
 
 const rootRoute=createRootRoute({ component: App });
@@ -57,7 +55,7 @@ const routeTree=rootRoute.addChildren([
     component: AdminDonantesPage,
     getParentRoute: () => rootRoute,
     beforeLoad: () => {
-      if (!isAdminAuthenticated()) {
+      if (!isAdmin()) {
         throw redirect({ to: '/login' });
       }
     },
@@ -67,7 +65,7 @@ const routeTree=rootRoute.addChildren([
     component: AdminSuggestionsPage,
     getParentRoute: () => rootRoute,
     beforeLoad: () => {
-      if (!isAdminAuthenticated()) {
+      if (!isAdmin()) {
         throw redirect({ to: '/login' });
       }
     },
@@ -93,7 +91,7 @@ const routeTree=rootRoute.addChildren([
     component: AdminNoticiasPage,
     getParentRoute: () => rootRoute,
     beforeLoad: () => {
-      if (!isAdminAuthenticated()) {
+      if (!isAdmin()) {
         throw redirect({ to: '/login' });
       }
     },
@@ -103,7 +101,7 @@ const routeTree=rootRoute.addChildren([
     component: AdminChatPage,
     getParentRoute: () => rootRoute,
     beforeLoad: () => {
-      if (!isAdminAuthenticated()) throw redirect({ to: '/login' });
+      if (!isAdmin()) throw redirect({ to: '/login' });
     },
   }),
   createRoute({
@@ -111,7 +109,7 @@ const routeTree=rootRoute.addChildren([
     component: AdminEquipoPage,
     getParentRoute: () => rootRoute,
     beforeLoad: () => {
-      if (!isAdminAuthenticated()) throw redirect({ to: '/login' });
+      if (!isAdmin()) throw redirect({ to: '/login' });
     },
   }),
   createRoute({
@@ -119,7 +117,7 @@ const routeTree=rootRoute.addChildren([
     component: AdminEstadisticasPage,
     getParentRoute: () => rootRoute,
     beforeLoad: () => {
-      if (!isAdminAuthenticated()) throw redirect({ to: '/login' });
+      if (!isAdmin()) throw redirect({ to: '/login' });
     },
   }),
   createRoute({
@@ -127,7 +125,7 @@ const routeTree=rootRoute.addChildren([
     component: AdminUsuariosPage,
     getParentRoute: () => rootRoute,
     beforeLoad: () => {
-      if (!isAdminAuthenticated()) throw redirect({ to: '/login' });
+      if (!isAdmin()) throw redirect({ to: '/login' });
     },
   }),
   createRoute({
@@ -135,7 +133,7 @@ const routeTree=rootRoute.addChildren([
     component: AdminVehiculosPage,
     getParentRoute: () => rootRoute,
     beforeLoad: () => {
-      if (!isAdminAuthenticated()) throw redirect({ to: '/login' });
+      if (!isAdmin()) throw redirect({ to: '/login' });
     },
   }),
   createRoute({

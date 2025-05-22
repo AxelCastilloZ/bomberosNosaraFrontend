@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { useAdminAuth } from '../../auth/AdminAuthContext';
-import { authenticateAdmin } from '../../auth/AdminAuth';
+import { login } from '../../auth/authService'; // llama al backend
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState('');
@@ -10,17 +10,15 @@ export default function AdminLoginPage() {
   const navigate = useNavigate();
   const { setUser } = useAdminAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const isValid = authenticateAdmin(username, password);
-
-    if (isValid) {
-      localStorage.setItem('adminUser', username);
-      localStorage.setItem('adminPass', password);
-      setUser(username);
-      navigate({ to: '/admin' });
-    } else {
-      setError('Credenciales inválidas');
+    try {
+      const token = await login(username, password);
+      localStorage.setItem('authToken', token);  // almacena el token
+      setUser(username);                         // actualiza contexto
+      navigate({ to: '/admin' });                // redirige
+    } catch (err: any) {
+      setError(err.message || 'Error desconocido');
     }
   };
 
