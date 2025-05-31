@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { Suggestion } from '../types/suggestion';
 
-const BIN_ID='68280c258a456b79669f6333'; // Sustituir por tu JSONBin ID
-const API_KEY='$2a$10$jh5ro1ejselC7DUeTUrJwOJrxBFtnViB8YYFCfo/fR8wky6o5eoFK'; // Sustituir por tu API Key
+const BIN_ID='68280c258a456b79669f6333'; 
+const API_KEY='$2a$10$jh5ro1ejselC7DUeTUrJwOJrxBFtnViB8YYFCfo/fR8wky6o5eoFK'; 
 const BASE_URL=`https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
 const headers={

@@ -1,10 +1,12 @@
-export const ADMIN_USERS = [
-    { username: 'Axel', password: '1234' },
-    { username: 'Cristhian', password: '1234' },
-    { username: 'Admin', password: 'admin' },
-  ];
-  
-  export const authenticateAdmin = (username: string, password: string) => {
-    return ADMIN_USERS.some(user => user.username === username && user.password === password);
-  };
-  
+export function logout() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('authUser'); 
+}
+
+export function isAuthenticated(): boolean {
+  return !!localStorage.getItem('token');
+}
+
+export function isAdmin() {
+  return !!localStorage.getItem('token');
+}

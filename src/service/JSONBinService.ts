@@ -1,4 +1,4 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { Donante } from '../types/donate';
 import { Noticia } from '../types/news';
@@ -22,7 +22,6 @@ const fetchData=async (): Promise<JSONBinData> => {
 
   const data=response.data?.record;
 
-  // Si faltan propiedades, se agregan y se guarda el bin actualizado
   const fixedData: JSONBinData={
     donantes: data?.donantes??[],
     noticias: data?.noticias??[],

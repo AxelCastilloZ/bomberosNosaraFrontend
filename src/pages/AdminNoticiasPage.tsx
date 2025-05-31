@@ -1,21 +1,21 @@
-import { useState, useMemo } from 'react';
-import {
-  useNoticias,
-  useAddNoticia,
-  useUpdateNoticia,
-  useDeleteNoticia,
-} from '../service/JSONBinService';
-import { Noticia } from '../types/news';
 import { useForm } from '@tanstack/react-form';
 import {
-  useReactTable,
-  getCoreRowModel,
-  flexRender,
   ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
 } from '@tanstack/react-table';
+import { useMemo, useState } from 'react';
+import { ConfirmModal } from '../components/ui/Modals/Donantes/ConfirmModal';
 import { LoadingModal } from '../components/ui/Modals/Donantes/LoadingModal';
 import { SuccessModal } from '../components/ui/Modals/Donantes/SuccessModal';
-import { ConfirmModal } from '../components/ui/Modals/Donantes/ConfirmModal';
+import {
+  useAddNoticia,
+  useDeleteNoticia,
+  useNoticias,
+  useUpdateNoticia,
+} from '../service/JSONBinNoticia';
+import { Noticia } from '../types/news';
 
 export default function AdminNoticiasPage() {
   const { data: noticias=[], isLoading }=useNoticias();

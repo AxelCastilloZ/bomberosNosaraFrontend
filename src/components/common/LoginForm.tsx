@@ -1,28 +1,48 @@
-import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
+import { useState } from 'react';
 import { useAdminAuth } from '../../auth/AdminAuthContext';
-import { authenticateAdmin } from '../../auth/AdminAuth';
 
 export default function AdminLoginPage() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { setUser } = useAdminAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    const isValid = authenticateAdmin(username, password);
+  const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError('');
 
-    if (isValid) {
-      localStorage.setItem('adminUser', username);
-      localStorage.setItem('adminPass', password);
-      setUser(username);
-      navigate({ to: '/admin' });
-    } else {
-      setError('Credenciales inválidas');
+  try {
+    const response = await fetch('https://localhost:7035/api/Auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email, 
+        password: password,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Credenciales inválidas');
     }
-  };
+
+    const data = await response.json();
+    localStorage.setItem('token', data.token); 
+    setUser(email); 
+    navigate({ to: '/admin' }); 
+  } catch (err: unknown) {
+  if (err instanceof Error) {
+    setError(err.message);
+  } else {
+    setError('Error desconocido al iniciar sesión');
+  }
+}
+
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -41,8 +61,8 @@ export default function AdminLoginPage() {
           <input
             id="username"
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full border px-3 py-2 rounded"
             required
           />
