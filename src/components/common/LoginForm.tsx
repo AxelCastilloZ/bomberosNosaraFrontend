@@ -14,7 +14,7 @@ export default function AdminLoginPage() {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3000/auth/login', { // URL nueva del backend NestJS
+      const response = await fetch('http://localhost:3000/auth/login', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export default function AdminLoginPage() {
       }
 
       const data = await response.json();
-      localStorage.setItem('token', data.access_token); // Nuevo campo del backend NestJS
+      localStorage.setItem('token', data.access_token); 
       setUser(email);
       navigate({ to: '/admin' });
     } catch (err: unknown) {

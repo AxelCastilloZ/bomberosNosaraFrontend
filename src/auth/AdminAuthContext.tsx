@@ -60,8 +60,6 @@ export const AdminAuthProvider = ({ children }: { children: React.ReactNode }) =
 
 export const useAdminAuth = () => useContext(AdminAuthContext);
 
-// Funciones utilitarias para otras partes del frontend
-
 export function logout() {
   localStorage.removeItem('token');
   localStorage.removeItem('authUser');
