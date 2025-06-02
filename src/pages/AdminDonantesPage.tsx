@@ -4,7 +4,7 @@ import {
   useAddDonante,
   useUpdateDonante,
   useDeleteDonante,
-} from '../service/JSONBinService';
+} from '../service/donorService'; 
 import { Donante } from '../types/donate';
 import { useForm } from '@tanstack/react-form';
 import {
@@ -16,7 +16,6 @@ import {
 import { LoadingModal } from '../components/ui/Modals/Donantes/LoadingModal';
 import { SuccessModal } from '../components/ui/Modals/Donantes/SuccessModal';
 import { ConfirmModal } from '../components/ui/Modals/Donantes/ConfirmModal';
-
 
 export default function AdminDonantesPage() {
   const { data: donantes = [], isLoading } = useDonantes();

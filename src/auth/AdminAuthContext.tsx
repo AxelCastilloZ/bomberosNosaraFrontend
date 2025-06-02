@@ -34,11 +34,12 @@ export const AdminAuthProvider = ({ children }: { children: React.ReactNode }) =
     } else {
       setUserState(null);
       localStorage.removeItem('authUser');
+      localStorage.removeItem('token');
     }
   };
 
   const logout = () => {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('token');
     localStorage.removeItem('authUser');
     setUserState(null);
   };
@@ -49,7 +50,7 @@ export const AdminAuthProvider = ({ children }: { children: React.ReactNode }) =
         user,
         setUser,
         logout,
-        isAuthenticated: !!user,
+        isAuthenticated: !!user && !!localStorage.getItem('token'),
       }}
     >
       {children}
@@ -58,6 +59,7 @@ export const AdminAuthProvider = ({ children }: { children: React.ReactNode }) =
 };
 
 export const useAdminAuth = () => useContext(AdminAuthContext);
+
 export function logout() {
   localStorage.removeItem('token');
   localStorage.removeItem('authUser');
@@ -67,7 +69,6 @@ export function isAuthenticated(): boolean {
   return !!localStorage.getItem('token');
 }
 
-export function isAdmin() {
-  const token = localStorage.getItem('token');
-  return !!token; 
-};
+export function isAdmin(): boolean {
+  return !!localStorage.getItem('token');
+}

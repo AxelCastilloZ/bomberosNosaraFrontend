@@ -10,39 +10,37 @@ export default function AdminLoginPage() {
   const { setUser } = useAdminAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setError('');
+    e.preventDefault();
+    setError('');
 
-  try {
-    const response = await fetch('https://localhost:7035/api/Auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email, 
-        password: password,
-      }),
-    });
+    try {
+      const response = await fetch('http://localhost:3000/auth/login', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
 
-    if (!response.ok) {
-      throw new Error('Credenciales inválidas');
+      if (!response.ok) {
+        throw new Error('Credenciales inválidas');
+      }
+
+      const data = await response.json();
+      localStorage.setItem('token', data.access_token); 
+      setUser(email);
+      navigate({ to: '/admin' });
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Error desconocido al iniciar sesión');
+      }
     }
-
-    const data = await response.json();
-    localStorage.setItem('token', data.token); 
-    setUser(email); 
-    navigate({ to: '/admin' }); 
-  } catch (err: unknown) {
-  if (err instanceof Error) {
-    setError(err.message);
-  } else {
-    setError('Error desconocido al iniciar sesión');
-  }
-}
-
-};
-
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
