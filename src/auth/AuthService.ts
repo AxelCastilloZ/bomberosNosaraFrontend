@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/auth/login';
 
-export async function login(email: string, password: string): Promise<string> {
+export async function login(username: string, password: string): Promise<string> {
   try {
-    const response = await axios.post(API_URL, { email, password });
+    const response = await axios.post(API_URL, { username, password });
     return response.data.access_token;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -13,3 +13,4 @@ export async function login(email: string, password: string): Promise<string> {
     throw new Error('Unknown error');
   }
 }
+

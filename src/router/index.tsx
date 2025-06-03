@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-router';
 
 import App from '../App';
-import { isAdmin } from '../auth/AdminAuth';
+import { isAdmin, isSuperUser } from '../auth/AdminAuth';
 import AboutSection from '../components/ui/AboutUs/AboutSection';
 import AdminDonantesPage from '../pages/AdminDonantesPage';
 import AdminLoginPage from '../pages/AdminLoginPage';
@@ -121,13 +121,16 @@ const routeTree=rootRoute.addChildren([
     },
   }),
   createRoute({
-    path: '/admin/usuarios',
-    component: AdminUsuariosPage,
-    getParentRoute: () => rootRoute,
-    beforeLoad: () => {
-      if (!isAdmin()) throw redirect({ to: '/login' });
-    },
-  }),
+  path: '/admin/usuarios',
+  component: AdminUsuariosPage,
+  getParentRoute: () => rootRoute,
+  beforeLoad: () => {
+    if (!isSuperUser()) {
+      throw redirect({ to: '/login' });
+    }
+  },
+}),
+
   createRoute({
     path: '/admin/vehiculos',
     component: AdminVehiculosPage,

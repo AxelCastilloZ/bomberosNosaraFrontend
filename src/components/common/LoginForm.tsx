@@ -20,9 +20,10 @@ export default function AdminLoginPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: email,
-          password: password,
+         username: email, 
+         password: password,
         }),
+
       });
 
       if (!response.ok) {

@@ -9,7 +9,7 @@ const AdminEquipoPage = () => {
       <EquipoForm />
       <EquipoTable />
     </div>
-  );
+  );    
 };
 
 export default AdminEquipoPage;

@@ -1,18 +1,72 @@
+import {
+  FaUserShield,
+  FaUsers,
+  FaFireExtinguisher,
+  FaTruck,
+  FaChartBar,
+  FaComments,
+  FaNewspaper,
+} from "react-icons/fa";
+import { getUserRoles } from '../../auth/AdminAuth'; // ajustá path si es necesario
 
-import { FaUserShield, FaUsers, FaFireExtinguisher, FaTruck, FaChartBar, FaComments ,FaNewspaper} from "react-icons/fa";
-
-const dashboardItems = [
-  { icon: <FaUserShield size={24} />, label: "Administrar Donantes", href: "/admin/donantes" },
-  { icon: <FaUsers size={24} />, label: "Gestión de Usuarios", href: "/admin/usuarios" },
-  { icon: <FaFireExtinguisher size={24} />, label: "Inventario de Equipo", href: "/admin/equipo" },
-  { icon: <FaTruck size={24} />, label: "Inventario de Vehículos", href: "/admin/vehiculos" },
-  { icon: <FaChartBar size={24} />, label: "Estadísticas", href: "/admin/estadisticas" },
-  { icon: <FaComments size={24} />, label: "Chat Interno", href: "/admin/chat" },
-  { icon: <FaNewspaper size={24}/>, label: "Administrar Noticias", href: "/admin/noticias"},
-  { icon: <FaComments size={24} />, label: "Sugerencias", href: "/admin/sugerencias" },
+const allDashboardItems = [
+  {
+    icon: <FaUserShield size={24} />,
+    label: "Administrar Donantes",
+    href: "/admin/donantes",
+    roles: ["SUPERUSER", "ADMIN"],
+  },
+  {
+    icon: <FaUsers size={24} />,
+    label: "Gestión de Usuarios",
+    href: "/admin/usuarios",
+    roles: ["SUPERUSER"],
+  },
+  {
+    icon: <FaFireExtinguisher size={24} />,
+    label: "Inventario de Equipo",
+    href: "/admin/equipo",
+    roles: ["SUPERUSER", "ADMIN"],
+  },
+  {
+    icon: <FaTruck size={24} />,
+    label: "Inventario de Vehículos",
+    href: "/admin/vehiculos",
+    roles: ["SUPERUSER", "ADMIN"],
+  },
+  {
+    icon: <FaChartBar size={24} />,
+    label: "Estadísticas",
+    href: "/admin/estadisticas",
+    roles: ["SUPERUSER", "ADMIN"],
+  },
+  {
+    icon: <FaComments size={24} />,
+    label: "Chat Interno",
+    href: "/admin/chat",
+    roles: ["SUPERUSER", "ADMIN", "PERSONAL_BOMBERIL", "VOLUNTARIO"],
+  },
+  {
+    icon: <FaNewspaper size={24} />,
+    label: "Administrar Noticias",
+    href: "/admin/noticias",
+    roles: ["SUPERUSER", "ADMIN"],
+  },
+  {
+    icon: <FaComments size={24} />,
+    label: "Sugerencias",
+    href: "/admin/sugerencias",
+    roles: ["SUPERUSER", "ADMIN"],
+  },
 ];
 
 const AdminDashboardPage = () => {
+  const userRoles = getUserRoles();
+
+  const dashboardItems = allDashboardItems.filter(item =>
+    item.roles.some(role => userRoles.includes(role))
+  );
+
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-8 text-red-700">Panel Administrativo</h1>
