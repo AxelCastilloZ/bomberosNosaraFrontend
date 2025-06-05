@@ -12,18 +12,21 @@ export const useDonantes = () => {
       const res = await axios.get(API_URL);
       return res.data;
     },
-    staleTime: 1000 * 60 * 10,
+    staleTime: 1000 * 60 * 10, 
   });
 };
 
-// POST
+// POST 
 export const useAddDonante = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (newDonante: Donante) => {
+      console.log('Enviando al backend (POST):', newDonante);
       await axios.post(API_URL, newDonante);
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['donantes'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['donantes'] });
+    },
   });
 };
 
@@ -34,7 +37,9 @@ export const useUpdateDonante = () => {
     mutationFn: async (donante: Donante) => {
       await axios.put(`${API_URL}/${donante.id}`, donante);
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['donantes'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['donantes'] });
+    },
   });
 };
 
@@ -45,6 +50,8 @@ export const useDeleteDonante = () => {
     mutationFn: async (id: string) => {
       await axios.delete(`${API_URL}/${id}`);
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['donantes'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['donantes'] });
+    },
   });
 };

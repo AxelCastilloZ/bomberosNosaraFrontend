@@ -41,7 +41,25 @@ export default function AdminDonantesPage() {
     },
     onSubmit: async ({ value }) => {
       setShowLoading(true);
-      setTimeout(() => {
+
+      
+      const camposInvalidos = Object.entries(value).filter(
+        ([_, v]) => !v || v.trim() === ''
+      );
+      if (camposInvalidos.length > 0) {
+        alert('Todos los campos son obligatorios');
+        setShowLoading(false);
+        return;
+      }
+
+      
+      if (!editingDonante && donantes.some(d => d.id === value.id)) {
+        alert('Ya existe un donante con ese ID');
+        setShowLoading(false);
+        return;
+      }
+
+      try {
         if (editingDonante) {
           updateDonante(value);
           setSuccessMsg(`Donante actualizado: ${value.nombre}`);
@@ -49,12 +67,15 @@ export default function AdminDonantesPage() {
           addDonante(value);
           setSuccessMsg(`Donante agregado: ${value.nombre}`);
         }
+      } catch (err) {
+        alert('Error al guardar el donante');
+      } finally {
         setShowLoading(false);
         setShowSuccess(true);
         setIsFormOpen(false);
         setEditingDonante(null);
         form.reset();
-      }, 1000);
+      }
     },
   });
 
@@ -183,6 +204,7 @@ export default function AdminDonantesPage() {
         )}
       </div>
 
+      {/* Formulario de creación/edición */}
       {isFormOpen && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4">
           <div className="bg-white p-6 rounded-xl shadow-xl w-full max-w-xl">
@@ -203,6 +225,7 @@ export default function AdminDonantesPage() {
                     value={field.state.value}
                     onChange={(e) => field.handleChange(e.target.value)}
                     className="w-full border p-2 rounded"
+                    disabled={!!editingDonante} 
                   />
                 )}
               </form.Field>
