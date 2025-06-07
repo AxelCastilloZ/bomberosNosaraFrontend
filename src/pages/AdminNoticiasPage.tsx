@@ -14,7 +14,7 @@ import {
   useDeleteNoticia,
   useNoticias,
   useUpdateNoticia,
-} from '../service/JSONBinNoticia';
+} from '../service/noticiasService';
 import { Noticia } from '../types/news';
 
 export default function AdminNoticiasPage() {

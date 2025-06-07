@@ -1,5 +1,5 @@
 import { NoticiaCard } from './NoticiaCard';
-import { useNoticias } from '../../../service/JSONBinNoticia';
+import { useNoticias } from '../../../service/noticiasService';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
