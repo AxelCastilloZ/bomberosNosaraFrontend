@@ -1,7 +1,6 @@
 import { useForm } from '@tanstack/react-form';
 import { useAddSuggestion } from '../../../hooks/useSuggestions';
 import { Suggestion } from '../../../types/suggestion';
-import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import { SuccessModal } from '../Modals/suggestions/SuccessSuggestionModal';
 import { LoadingModal } from '../Modals/Donantes/LoadingModal';
@@ -22,8 +21,6 @@ export function SuggestionForm({ onSuccess }: { onSuccess?: () => void }) {
       setShowLoading(true);
       const nueva: Suggestion = {
         ...value,
-        id: uuidv4(),
-        fecha: new Date().toISOString(),
       };
       setTimeout(async () => {
         await addMutation.mutateAsync(nueva);
