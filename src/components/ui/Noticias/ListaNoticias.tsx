@@ -43,7 +43,7 @@ export const ListaNoticias = () => {
 
   const configuracionCarrusel = {
     dots: true, 
-    infinite: true, 
+    infinite: noticias!!.length > 1, 
     speed: 500, 
     slidesToShow: 1, 
     slidesToScroll: 1,
@@ -51,7 +51,6 @@ export const ListaNoticias = () => {
     autoplaySpeed: 5000, 
     prevArrow: <FlechaCarrusel direccion="izquierda" />,
     nextArrow: <FlechaCarrusel direccion="derecha" />,
-    
     customPaging: () => (
       <button className="w-3 h-3 rounded-full bg-gray-300 hover:bg-red-500 mt-4" />
     )
